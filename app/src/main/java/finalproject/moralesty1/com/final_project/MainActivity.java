@@ -1,39 +1,58 @@
 package finalproject.moralesty1.com.final_project;
 
-import android.support.v7.app.ActionBarActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    // This is the dataset for the RecyclerView
+    private List<Theater> theater;
+
+    private TextView tvDownload;
+    private RecyclerView recyclerPeople;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tvDownload = (TextView) findViewById(R.id.tv_download);
+        recyclerPeople = (RecyclerView) findViewById(R.id.recycler_download);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerPeople.setLayoutManager(layoutManager);
+
+        tvDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This is an AsyncTask call
+                new TheaterTask().execute();
+            }
+        });
     }
 
+    // This is the AsyncTask which will make our network call off the main thread
+    // otherwise, our app would be locked up until it was finished
+    private class TheaterTask extends AsyncTask<Void, Void, Void> {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        @Override
+        protected Void doInBackground(Void... params) {
+            // This accesses our Api singleton and requests a service, then a specific call.
+            theater = Api.get().getPeople();
+            return null;
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            recyclerPeople.setAdapter(new TheaterAdapter(theater));
+            super.onPostExecute(aVoid);
+        }
     }
 }
