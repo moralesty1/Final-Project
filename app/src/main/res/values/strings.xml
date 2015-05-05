@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Final-Project</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="introP1">Please Select A location!</string>
+    <string name="introP2">Or</string>
+    <string name="currentButton">Current</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_display_results">DisplayResults</string>
 </resources>
