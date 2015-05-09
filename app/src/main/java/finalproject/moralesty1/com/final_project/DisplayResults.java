@@ -22,28 +22,21 @@ public class DisplayResults extends ActionBarActivity {
     // This is the dataset for the RecyclerView
     private List<Theater> theater;
 
-    protected GoogleApiClient mGoogleApiClient;
 
     private TextView tvDownload;
     private RecyclerView recyclerPeople;
-    private double longitude;
-    private double latitude;
+    private String longitude;
+    private String latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_display_results);
 
         Intent intent = getIntent();
 
-        longitude = Double.parseDouble(intent.getStringExtra("Lng"));
-        latitude = Double.parseDouble(intent.getStringExtra("Lat"));
-
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .build();
+        longitude = intent.getStringExtra("Lng");
+        latitude = intent.getStringExtra("Lat");
 
 
         tvDownload = (TextView) findViewById(R.id.tv_download);
@@ -60,17 +53,6 @@ public class DisplayResults extends ActionBarActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
 
     // This is the AsyncTask which will make our network call off the main thread
     // otherwise, our app would be locked up until it was finished
@@ -79,7 +61,7 @@ public class DisplayResults extends ActionBarActivity {
         @Override
         protected Void doInBackground(Void... params) {
             // This accesses our Api singleton and requests a service, then a specific call.
-            theater = Api.get().getPeople();
+            theater = Api.get().getName();
             return null;
         }
 

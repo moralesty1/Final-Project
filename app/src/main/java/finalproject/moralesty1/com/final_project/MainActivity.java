@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
     private double longitude;
     private double latitude;
 
-    private Intent intent = new Intent(MainActivity.this, DisplayResults.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,8 @@ public class MainActivity extends ActionBarActivity {
         Button current = (Button) findViewById(R.id.currentButton);
         current.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+
+                Intent intent = new Intent(MainActivity.this, DisplayResults.class);
 
                 CurrentLatLong locate = new CurrentLatLong(MainActivity.this);
                 locate.findLocation();

@@ -13,20 +13,21 @@ import retrofit.converter.GsonConverter;
  */
 public class Api {
 
+
     // Notice these are both Static
 
     // This is the endpoint URL we will be accessing -- it will return to us JSON data
-    private static final String ENDPOINT = "http://private-8ceb6-learnretofitpeople.apiary-mock.com/people/";
-    // PeopleService is an interface which describes all of the network calls we can make
-    private static PeopleService peopleService;
+    private static final String ENDPOINT = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=movie+theater&types=movie_theater&location=46.8772,-96.7894&radius=500&key=AIzaSyBkEg-_RAuj_0W9P8YxSKM4Bu4OuM5mBNw";
+    // TheaterService is an interface which describes all of the network calls we can make
+    private static TheaterService TheaterService;
 
     // A private parameterless constructor prevents instantiation
     private Api() {
     }
 
     // This function ensures that only one instance of the Service is ever instantiated
-    public static PeopleService get() {
-        if (peopleService == null) {
+    public static TheaterService get() {
+        if (TheaterService == null) {
             // Gson is a JSON serialization wrapper. It defines how we wish to interpret incoming JSON
             Gson gson = new GsonBuilder()
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -44,9 +45,9 @@ public class Api {
                     .build();
 
             // Create it, assign it to our static People Service
-            peopleService = restAdapter.create(PeopleService.class);
+            TheaterService = restAdapter.create(TheaterService.class);
         }
 
-        return peopleService;
+        return TheaterService;
     }
 }
