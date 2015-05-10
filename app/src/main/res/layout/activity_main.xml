@@ -13,7 +13,7 @@
         android:textColor="@color/white"
         android:layout_above="@+id/currentButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="68dp" />
+        android:layout_marginBottom="62dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,10 +22,24 @@
         android:id="@+id/currentButton"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.95"
-        android:layout_marginBottom="146dp"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_alignStart="@+id/textView"
         android:layout_alignEnd="@+id/textView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="118dp"
+        android:enabled="false"
+        android:text="@string/favButton"
+        android:id="@+id/favButton"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.95"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/currentButton"
+        android:layout_marginBottom="43dp"
+        android:layout_alignEnd="@+id/currentButton" />
+
+
 
 
 

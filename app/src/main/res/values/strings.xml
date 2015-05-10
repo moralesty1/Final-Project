@@ -4,6 +4,7 @@
     <string name="introP1">Welcome to The Movie Theater Finder\n Please press the button to get started!</string>
     <string name="introP2">Or</string>
     <string name="currentButton">Find Theaters Now</string>
+    <string name="favButton">show Favorite Theaters</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_display_results">DisplayResults</string>
 

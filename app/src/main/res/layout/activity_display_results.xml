@@ -8,7 +8,7 @@
     tools:context="finalproject.moralesty1.com.final_project.DisplayResults">
 
     <TextView
-        android:id="@+id/tv_download"
+        android:id="@+id/theater_download"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#afc639"

@@ -6,14 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.places.Places;
-
 import java.util.List;
 
 
@@ -21,13 +15,11 @@ public class DisplayResults extends ActionBarActivity {
 
     // This is the dataset for the RecyclerView
     private List<Theater> theater;
-
-
-
-    private TextView tvDownload;
-    private RecyclerView recyclerPeople;
+    private TextView theaterDownload;
+    private RecyclerView recyclerTheaters;
     private String longitude;
     private String latitude;
+    private String favStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +30,15 @@ public class DisplayResults extends ActionBarActivity {
 
         longitude = intent.getStringExtra("Lng");
         latitude = intent.getStringExtra("Lat");
+        favStatus = intent.getStringExtra("Fav");
 
 
-        tvDownload = (TextView) findViewById(R.id.tv_download);
-        recyclerPeople = (RecyclerView) findViewById(R.id.recycler_download);
+        theaterDownload = (TextView) findViewById(R.id.theater_download);
+        recyclerTheaters = (RecyclerView) findViewById(R.id.recycler_download);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerPeople.setLayoutManager(layoutManager);
+        recyclerTheaters.setLayoutManager(layoutManager);
 
-        tvDownload.setOnClickListener(new View.OnClickListener() {
+        theaterDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // This is an AsyncTask call
@@ -68,7 +61,8 @@ public class DisplayResults extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            recyclerPeople.setAdapter(new TheaterAdapter(theater,placesUrl,latitude,longitude));
+
+            recyclerTheaters.setAdapter(new TheaterAdapter(theater,placesUrl,latitude,longitude,favStatus));
             super.onPostExecute(aVoid);
         }
     }

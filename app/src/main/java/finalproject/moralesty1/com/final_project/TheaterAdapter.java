@@ -1,7 +1,7 @@
 package finalproject.moralesty1.com.final_project;
 
 import android.content.Context;
-import android.os.AsyncTask;
+import android.support.v7.internal.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,20 +20,29 @@ import java.util.List;
 public class TheaterAdapter extends RecyclerView.Adapter<TheaterAdapter.ViewHolder> {
     private static final int ITEM_RES_ID = R.layout.item_theater;
 
-    private ArrayList<Theater> theaters;
+    private static ArrayList<Theater> theaters;
     private double lat;
     private double lng;
     private ViewHolder.ItemClickListener listener;
-    private Context context;
+    private static Context context;
 
-    public TheaterAdapter(final List<Theater> theaters,String pUrl,String sLat, String sLng) {
+    public TheaterAdapter(final List<Theater> theaters,String pUrl,String sLat, String sLng,String status) {
         lat = Double.parseDouble(sLat);
         lng = Double.parseDouble(sLng);
-        this.theaters = Api.parseGooglePlaces(pUrl);
+        if(status.equals("YES"))
+        {
+            this.theaters = SaveFavorites.getFavorites(context);
+        }
+        else
+        {
+            this.theaters = Api.parseGooglePlaces(pUrl);
+        }
+
         listener = new ViewHolder.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Theater theater = theaters.get(position);
+                SaveFavorites.addFavorite(context ,theater);
             }
         };
     }
@@ -62,7 +71,7 @@ public class TheaterAdapter extends RecyclerView.Adapter<TheaterAdapter.ViewHold
 
         holder.theaterName.setText("Name: "+theater.getName());
         holder.theaterAddress.setText("Address: "+theater.getAddress());
-        holder.theaterDistance.setText("Distance: "+theater.getDistance()+" Miles");
+        holder.theaterDistance.setText("Distance: " + theater.getDistance() + " Miles");
 
 
     }
@@ -88,12 +97,16 @@ public class TheaterAdapter extends RecyclerView.Adapter<TheaterAdapter.ViewHold
             theaterDistance = (TextView) itemView.findViewById(R.id.theater_distance);
 
 
+
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             listener.onItemClick(view, getPosition());
+            TextView theaterFav = (TextView) itemView.findViewById(R.id.favorite);
+            theaterFav.setText("Saved as Favorite");
+
         }
 
         public interface ItemClickListener {
