@@ -3,22 +3,30 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/movie1"
+    android:weightSum="1">
 
     <TextView android:text="@string/introP1" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:id="@+id/textView"
+        android:textColor="@color/white"
+        android:layout_above="@+id/currentButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp"
-        android:id="@+id/textView" />
+        android:layout_marginBottom="68dp" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="118dp"
         android:text="@string/currentButton"
         android:id="@+id/currentButton"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.95"
+        android:layout_marginBottom="146dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+
 
 </RelativeLayout>

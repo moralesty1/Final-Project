@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffabcdef"
+    android:background="@drawable/filmreel"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/theater_name"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="test1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="217dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/theater_address"
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:text="test2"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/theater_name"
+        android:layout_alignStart="@+id/theater_name" />
 
     <TextView
         android:id="@+id/theater_distance"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/white"
+        android:text="test3"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/theater_address"
+        android:layout_alignStart="@+id/theater_address"
+        android:layout_marginTop="45dp" />
 
-</LinearLayout>
+</RelativeLayout>

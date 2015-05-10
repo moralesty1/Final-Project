@@ -23,6 +23,7 @@ public class DisplayResults extends ActionBarActivity {
     private List<Theater> theater;
 
 
+
     private TextView tvDownload;
     private RecyclerView recyclerPeople;
     private String longitude;
@@ -57,17 +58,17 @@ public class DisplayResults extends ActionBarActivity {
     // This is the AsyncTask which will make our network call off the main thread
     // otherwise, our app would be locked up until it was finished
     private class TheaterTask extends AsyncTask<Void, Void, Void> {
-
+        String placesUrl;
         @Override
         protected Void doInBackground(Void... params) {
             // This accesses our Api singleton and requests a service, then a specific call.
-            theater = Api.get().getName();
+            placesUrl = Api.makeCall("https://maps.googleapis.com/maps/api/place/textsearch/json?query=movie+theater&types=movie_theater&location=" + latitude + "," + longitude + "&radius=500&key=AIzaSyBkEg-_RAuj_0W9P8YxSKM4Bu4OuM5mBNw");
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            recyclerPeople.setAdapter(new TheaterAdapter(theater));
+            recyclerPeople.setAdapter(new TheaterAdapter(theater,placesUrl,latitude,longitude));
             super.onPostExecute(aVoid);
         }
     }
